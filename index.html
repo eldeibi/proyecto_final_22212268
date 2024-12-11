@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <script>
+        fetch('/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(error => console.error('Error cargando el navbar:', error));
+    </script>
+</body>
+
+<body>
+  <h1>Bienvenido a la Empresa Med Help</h1>
+</body>
+
+<script>
+  fetch('/tipo-usuario')
+      .then(response => response.json())
+      .then(data => {
+          const menu = document.getElementById('menu');
+          const tipoUsuario = data.tipo_usuario;
+
+          if (tipoUsuario === 'Gerente') {
+              menu.innerHTML += '<li><a href="/ver-usuarios">Ver Usuarios</a></li>';
+              menu.innerHTML += '<li><a href="/areas.html">Gestionar Rendimiento de las Areas</a></li>';
+              menu.innerHTML += '<li><a href="/busqueda.html">Ver Usuarios en Tiempo Real</a></li>';
+              menu.innerHTML += '<li><a href="/drop.html">Tabla con Aparatos Patentados</a></li>';
+          } else if (tipoUsuario === 'RH') {
+            menu.innerHTML += '<li><a href="/inicio">Contratar Multiples Empleados</a></li>';
+              menu.innerHTML += '<li><a href="/empleados1">Empleados Zona 1</a></li>';
+              menu.innerHTML += '<li><a href="/empleados2">Empleados Zona 2</a></li>';
+              menu.innerHTML += '<li><a href="/empleados3">Empleados Zona 3</a></li>';
+          } else if (tipoUsuario === 'Finanzas') {
+              menu.innerHTML += '<li><a href="/salarios-des">Salarios de Empleados en Orden</a></li>';
+              menu.innerHTML += '<li><a href="/salarios-mayor">Salarios Mayor al Promedio</a></li>';
+              menu.innerHTML += '<li><a href="/salarios-menor">Salarios Menor al Promedio</a></li>';
+          }
+          menu.innerHTML += '<li><a href="/ver-mis-datos">Mis Datos</a></li>';
+
+          menu.innerHTML += '<li><a href="/logout">Cerrar Sesión</a></li>';
+      })
+      .catch(error => console.error('Error obteniendo el tipo de usuario:', error));
+</script>
+
+<h2>Agregar un Nuevo Empleado</h2>
+<form action="/agregar-trabajador" method="POST">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name">
+    
+    <label for="age">Edad:</label>
+    <input type="number" id="age" name="age">
+  
+    <label for="salary">Salario:</label>
+    <input type="number" id="salary" name="salary">
+
+    <label for="zona_id">ID de Zona de Trabajo:</label>
+    <input type="number" id="zona_id" name="zona_id">
+  
+    <button type="submit-data">Guardar</button>
+  </form>
+
+
+
+  <h2>Dar de Baja a un Empleado</h2>
+  <form action="/baja-empleado" method="POST">
+
+
+    <label for="id">ID:</label>
+    <input type="number" id="id" name="id">
+
+      <label for="name">Nombre del Empleado:</label>
+      <input type="text" id="name" name="name">
+      
+     
+  
+      <button type="submit-data">Guardar</button>
+    </form>
+
+    <button onclick="window.location.href='/empleados'">Ver Empleados Activos en la Empresa</button>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Pacientes y Médicos</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Pacientes y Médicos</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <p>¿Ya tienes cuenta? <a href="/login.html">Inicia sesión</a></p>
+  <p>¿No tienes cuenta? <a href="/registro.html">Regístrate aquí</a></p>
+  <a href="/logout">Cerrar Sesión</a>
+</body>
+
+  </html>
