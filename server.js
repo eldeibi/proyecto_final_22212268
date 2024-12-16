@@ -841,17 +841,19 @@ app.get('/downloadpdf', requireLogin, requireRole('Gerente'), (req, res) => {
 
 
 
+
 app.post('/drop_colum', requireLogin, requireRole('Gerente'),  (req, res) => {
   const {name} = req.body;
 
-  const query = 'ALTER TABLE aparatos_medicos DROP COLUMN ?';
-  connection.query(query, [name], (err, result) => {
+  const query = `ALTER TABLE aparatos_medicos DROP COLUMN ${name}`;
+  connection.query(query, (err, result) => {
     if (err) {
       return res.send('Error al borrar columna.');
     }
     res.send(`Columna ${name} borrada de la tabla.`);
   });
 });
+
 
 
 
